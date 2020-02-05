@@ -1,0 +1,6 @@
+# Software Known to use eBIS XML
+
+- https://www.mamsoftware.com/en/autopart
+    - A Kerridge Commercial Systems Company
+- https://www.basda.org/standards/ebis-xml/
+    - standards body
