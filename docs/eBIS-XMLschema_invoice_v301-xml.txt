@@ -1,0 +1,576 @@
+<!--  From http://www.basda.org/schema/eBIS-XMLschema_invoice_v3.01.xml -->
+<Schema name="eBIS-XML_Invoice_v3.01.xml" xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+    <ElementType name="Invoice" content="eltOnly" order="seq">
+                <element type="InvoiceHead"/>
+		<element type="InvoiceReferences"/>
+		<element type="InvoiceDate"/>
+		<element type="TypeOfSupply" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxPointDate" minOccurs="0" maxOccurs="1"/>
+		<element type="Supplier"/>
+		<element type="Buyer" minOccurs="0" maxOccurs="1"/>
+		<element type="Delivery" minOccurs="0" maxOccurs="*"/>
+		<element type="InvoiceTo"/>
+		<element type="InvoiceLine" minOccurs="1" maxOccurs="*"/>
+		<element type="PercentDiscount" minOccurs="0" maxOccurs="*"/>
+		<element type="AmountDiscount" minOccurs="0" maxOccurs="*"/>
+		<element type="SpecialInstructions" minOccurs="0" maxOccurs="*"/>
+		<element type="Narrative" minOccurs="0" maxOccurs="*"/>
+		<element type="Settlement" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxSubTotal" minOccurs="1" maxOccurs="*"/>
+		<element type="InvoiceTotal"/>
+	</ElementType>
+	<ElementType name="InvoiceDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="InvoiceReferences" content="eltOnly" order="seq">
+                <element type="ContractOrderReference" minOccurs="0" maxOccurs="1"/>
+		<element type="CostCentre" minOccurs="0" maxOccurs="1"/>
+		<element type="BuyersOrderNumber" minOccurs="0" maxOccurs="1"/>
+		<element type="Department" minOccurs="0" maxOccurs="1"/>
+		<element type="GeneralLedgerCode" minOccurs="0" maxOccurs="1"/>
+		<element type="ProjectCode" minOccurs="0" maxOccurs="1"/>
+		<element type="ProjectAnalysisCode" minOccurs="0" maxOccurs="1"/>
+		<element type="SuppliersInvoiceNumber"/>
+	</ElementType>
+	<ElementType name="ContractOrderReference" content="textOnly" dt:type="string"/>
+	<ElementType name="CostCentre" content="textOnly" dt:type="string"/>
+	<ElementType name="Department" content="textOnly" dt:type="string"/>
+	<ElementType name="GeneralLedgerCode" content="textOnly" dt:type="string"/>
+	<ElementType name="ProjectCode" content="textOnly" dt:type="string"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="ProjectAnalysisCode" content="textOnly" dt:type="string"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="InvoiceHead" content="eltOnly" order="seq"><element type="Schema"/>
+		<element type="Stylesheet" minOccurs="0" maxOccurs="1"/>
+		<element type="Parameters"/>
+		<element type="OriginatingSoftware" minOccurs="0" maxOccurs="1"/>
+		<element type="TestFlag" minOccurs="0" maxOccurs="1"/>
+		<element type="InvoiceType"/>
+		<element type="Function" minOccurs="0" maxOccurs="1"/>
+		<element type="InvoiceCurrency"/>
+		<element type="Intrastat" minOccurs="0" maxOccurs="1"/>
+		<element type="Checksum"/>
+	</ElementType>
+	<ElementType name="InvoiceType" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string" default="PUO"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="Function" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string" default="FIO"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="Supplier" content="eltOnly" order="seq"><element type="SupplierReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Buyer" content="eltOnly" order="seq"><element type="BuyerReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="DeliverTo" content="eltOnly" order="seq"><element type="DeliverToReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Location" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="InvoiceTo" content="eltOnly" order="seq"><element type="InvoiceToReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Carrier" content="eltOnly" order="seq"><element type="CarrierReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Delivery" content="eltOnly" order="seq"><element type="DeliverTo" minOccurs="0" maxOccurs="1"/>
+		<element type="Carrier" minOccurs="0" maxOccurs="1"/>
+		<element type="Quantity" minOccurs="0" maxOccurs="1"/>
+		<element type="EarliestAcceptableDate" minOccurs="0" maxOccurs="1"/>
+		<element type="LatestAcceptableDate" minOccurs="0" maxOccurs="1"/>
+		<element type="PreferredDate" minOccurs="0" maxOccurs="1"/>
+		<element type="SpecialInstructions" minOccurs="0" maxOccurs="*"/>
+		<element type="DeliveryInformation" minOccurs="0" maxOccurs="*"/>
+		<element type="Narrative" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="EarliestAcceptableDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="LatestAcceptableDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="PreferredDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="InvoiceLine" content="eltOnly" order="seq"><AttributeType name="Action" dt:type="enumeration" dt:values="Add Delete Change" default="Add"/>
+		<AttributeType name="TypeCode" dt:type="string"/>
+		<AttributeType name="TypeDescription" dt:type="string"/>
+		<AttributeType name="TypeCodelist" dt:type="string"/>
+		<attribute type="Action"/>
+		<attribute type="TypeCode"/>
+		<attribute type="TypeDescription"/>
+		<attribute type="TypeCodelist"/>
+		<element type="LineNumber"/>
+		<element type="InvoiceLineReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Product" minOccurs="0" maxOccurs="*"/>
+		<element type="Quantity" minOccurs="0" maxOccurs="1"/>
+		<element type="Price" minOccurs="1" maxOccurs="*"/>
+		<element type="PercentDiscount" minOccurs="0" maxOccurs="*"/>
+		<element type="AmountDiscount" minOccurs="0" maxOccurs="*"/>
+		<element type="LineTax" minOccurs="0" maxOccurs="1"/>
+		<element type="LineTotal"/>
+		<element type="Delivery" minOccurs="0" maxOccurs="*"/>
+		<element type="InvoiceLineInformation" minOccurs="0" maxOccurs="*"/>
+		<element type="ExtendedDescription" minOccurs="0" maxOccurs="*"/>
+		<element type="Narrative" minOccurs="0" maxOccurs="*"/>
+		<element type="LotSerial" minOccurs="0" maxOccurs="*"/>
+		<element type="Intrastat" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="LineNumber" content="textOnly" dt:type="int"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="LineTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="InvoiceLineReferences" content="eltOnly" order="seq"><element type="ContractOrderReference" minOccurs="0" maxOccurs="1"/>
+		<element type="CostCentre" minOccurs="0" maxOccurs="1"/>
+		<element type="GeneralLedgerCode" minOccurs="0" maxOccurs="1"/>
+		<element type="ProjectCode" minOccurs="0" maxOccurs="1"/>
+		<element type="ProjectAnalysisCode" minOccurs="0" maxOccurs="1"/>
+		<element type="BuyersOrderNumber" minOccurs="0" maxOccurs="1"/>
+		<element type="OrderLineNumber"/>
+		<element type="BuyersOrderLineReference" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="PercentDiscount" content="eltOnly" order="seq"><element type="QualifyingTerms" minOccurs="0" maxOccurs="1"/>
+		<element type="Type" minOccurs="0" maxOccurs="1"/>
+		<element type="Percentage"/>
+	</ElementType>
+	<ElementType name="AmountDiscount" content="eltOnly" order="seq"><element type="QualifyingTerms" minOccurs="0" maxOccurs="1"/>
+		<element type="Type" minOccurs="0" maxOccurs="1"/>
+		<element type="Amount"/>
+	</ElementType>
+	<ElementType name="Narrative" content="textOnly"/>
+	<ElementType name="Product" content="eltOnly" order="seq"><element type="SuppliersProductCode" minOccurs="0" maxOccurs="1"/>
+		<element type="BuyersProductCode" minOccurs="0" maxOccurs="1"/>
+		<element type="TradedUnitCode" minOccurs="0" maxOccurs="1"/>
+		<element type="ConsumerUnitCode" minOccurs="0" maxOccurs="1"/>
+		<element type="Description" minOccurs="0" maxOccurs="1"/>
+		<element type="Properties" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="SuppliersProductCode" content="textOnly" dt:type="string"/>
+	<ElementType name="Description" content="textOnly" dt:type="string"/>
+	<ElementType name="Quantity" content="eltOnly" order="seq"><AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCodelist"/>
+		<element type="Packsize" minOccurs="0" maxOccurs="1"/>
+		<element type="Amount" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Price" content="eltOnly" order="seq"><AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCodelist"/>
+		<element type="Units" minOccurs="0" maxOccurs="1"/>
+		<element type="UnitPrice"/>
+		<element type="SpecialPriceDescription" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Address" content="eltOnly" order="seq"><element type="AddressLine" minOccurs="0" maxOccurs="*"/>
+		<element type="Street" minOccurs="0" maxOccurs="*"/>
+		<element type="City" minOccurs="0" maxOccurs="1"/>
+		<element type="State" minOccurs="0" maxOccurs="1"/>
+		<element type="PostCode" minOccurs="0" maxOccurs="1"/>
+		<element type="Country" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Party" content="textOnly" dt:type="string"/>
+	<ElementType name="Street" content="textOnly" dt:type="string"/>
+	<ElementType name="City" content="textOnly" dt:type="string"/>
+	<ElementType name="State" content="textOnly" dt:type="string"/>
+	<ElementType name="PostCode" content="textOnly" dt:type="string"/>
+	<ElementType name="Country" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="ISO3166-1/3"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="AddressLine" content="textOnly" dt:type="string"/>
+	<ElementType name="Contact" content="eltOnly" order="seq"><element type="Name" minOccurs="0" maxOccurs="1"/>
+		<element type="Department" minOccurs="0" maxOccurs="1"/>
+		<element type="InternalAddress" minOccurs="0" maxOccurs="1"/>
+		<element type="DDI" minOccurs="0" maxOccurs="1"/>
+		<element type="Switchboard" minOccurs="0" maxOccurs="1"/>
+		<element type="Fax" minOccurs="0" maxOccurs="1"/>
+		<element type="Telex" minOccurs="0" maxOccurs="1"/>
+		<element type="Email" minOccurs="0" maxOccurs="1"/>
+		<element type="Mobile" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Name" content="textOnly" dt:type="string"/>
+	<ElementType name="InternalAddress" content="textOnly" dt:type="string"/>
+	<ElementType name="LineTax" content="eltOnly" order="seq"><element type="MixedRateIndicator" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxRate"/>
+		<element type="TaxValue" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxRef" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="MixedRateIndicator" content="textOnly" dt:type="string"/>
+	<ElementType name="TaxRate" content="textOnly" dt:type="float"><AttributeType name="Code" dt:type="string" required="yes"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="TaxValue" content="textOnly" dt:type="float"/>
+	<ElementType name="TaxRef" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="InvoiceTotal" content="eltOnly" order="seq"><element type="NumberOfLines"/>
+		<element type="NumberOfTaxRates"/>
+		<element type="LineValueTotal"/>
+		<element type="FreightCharges" minOccurs="0" maxOccurs="1"/>
+		<element type="MiscCharges" minOccurs="0" maxOccurs="1"/>
+		<element type="SettlementDiscountTotal" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxableTotal"/>
+		<element type="TaxTotal"/>
+		<element type="NetPaymentTotal"/>
+		<element type="GrossPaymentTotal"/>
+	</ElementType>
+	<ElementType name="Checksum" content="textOnly" dt:type="float"/>
+	<ElementType name="FreightCharges" content="textOnly" dt:type="float"/>
+	<ElementType name="MiscCharges" content="textOnly" dt:type="float"/>
+	<ElementType name="TaxTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="InvoiceCurrency" content="eltOnly" order="seq"><element type="Currency"/>
+		<element type="AlternateCurrency" minOccurs="0" maxOccurs="1"/>
+		<element type="Rate" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="TaxNumber" content="textOnly" dt:type="string"/>
+	<ElementType name="DDI" content="textOnly"/>
+	<ElementType name="Switchboard" content="textOnly"/>
+	<ElementType name="Fax" content="textOnly"/>
+	<ElementType name="Telex" content="textOnly"/>
+	<ElementType name="Email" content="textOnly"/>
+	<ElementType name="Mobile" content="textOnly"/>
+	<ElementType name="SpecialInstructions" content="textOnly" dt:type="string"/>
+	<ElementType name="DeliveryInformation" content="textOnly" dt:type="string"/>
+	<ElementType name="InvoiceLineInformation" content="textOnly" dt:type="string"/>
+	<ElementType name="ExtendedDescription" content="textOnly" dt:type="string"/>
+	<ElementType name="Properties" content="eltOnly" order="seq"><element type="Quantity" minOccurs="0" maxOccurs="1"/>
+		<element type="Length" minOccurs="0" maxOccurs="1"/>
+		<element type="Width" minOccurs="0" maxOccurs="1"/>
+		<element type="Depth" minOccurs="0" maxOccurs="1"/>
+		<element type="Weight" minOccurs="0" maxOccurs="1"/>
+		<element type="Volume" minOccurs="0" maxOccurs="1"/>
+		<element type="Height" minOccurs="0" maxOccurs="1"/>
+		<element type="Size" minOccurs="0" maxOccurs="1"/>
+		<element type="Color" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="SupplierReferences" content="eltOnly" order="seq"><element type="BuyersCodeForSupplier" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxNumber" minOccurs="0" maxOccurs="1"/>
+		<element type="GLN" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="BuyersCodeForSupplier" content="textOnly"/>
+	<ElementType name="GLN" content="textOnly"/>
+	<ElementType name="BuyerReferences" content="eltOnly" order="seq"><element type="SuppliersCodeForBuyer" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxNumber" minOccurs="0" maxOccurs="1"/>
+		<element type="GLN" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="SuppliersCodeForBuyer" content="textOnly"/>
+	<ElementType name="CarrierReferences" content="eltOnly" order="seq"><element type="BuyersCodeForCarrier" minOccurs="0" maxOccurs="1"/>
+		<element type="GLN" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="BuyersCodeForCarrier" content="textOnly"/>
+	<ElementType name="Currency" content="textOnly" dt:type="string"><AttributeType name="Codelist" dt:type="string" default="ISO4217"/>
+		<AttributeType name="Code" dt:type="string" required="yes"/>
+		<attribute type="Codelist"/>
+		<attribute type="Code"/>
+	</ElementType>
+	<ElementType name="Rate" content="textOnly" dt:type="float"><AttributeType name="CalculationType" dt:type="enumeration" dt:values="M D" required="yes"/>
+		<attribute type="CalculationType"/>
+	</ElementType>
+	<ElementType name="Length" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Width" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Depth" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Weight" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Volume" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Height" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string" default="UNECE"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Size" content="textOnly" dt:type="float"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Color" content="textOnly"><AttributeType name="UOMDescription" dt:type="string"/>
+		<AttributeType name="UOMCode" dt:type="string"/>
+		<AttributeType name="UOMCodelist" dt:type="string"/>
+		<attribute type="UOMDescription"/>
+		<attribute type="UOMCode"/>
+		<attribute type="UOMCodelist"/>
+	</ElementType>
+	<ElementType name="Packsize" content="textOnly"/>
+	<ElementType name="BuyersProductCode" content="textOnly" dt:type="string"/>
+	<ElementType name="Amount" content="textOnly" dt:type="float"/>
+	<ElementType name="TradedUnitCode" content="textOnly"/>
+	<ElementType name="Units" content="textOnly"/>
+	<ElementType name="UnitPrice" content="textOnly" dt:type="float"/>
+	<ElementType name="SpecialPriceDescription" content="textOnly"/>
+	<ElementType name="Type" content="textOnly"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="Percentage" content="textOnly" dt:type="float"/>
+	<ElementType name="DeliverToReferences" content="eltOnly" order="seq"><element type="BuyersCodeForDelivery" minOccurs="0" maxOccurs="1"/>
+		<element type="BuyersCodeForLocation" minOccurs="0" maxOccurs="1"/>
+		<element type="GLN" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="BuyersCodeForDelivery" content="textOnly"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="Location" content="textOnly"/>
+	<ElementType name="BuyersCodeForLocation" content="textOnly"/>
+	<ElementType name="BuyersOrderNumber" content="textOnly"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="OrderLineNumber" content="textOnly"/>
+	<ElementType name="Settlement" content="eltOnly" order="seq"><element type="SettlementTerms" minOccurs="0" maxOccurs="1"/>
+		<element type="SettlementMethod" minOccurs="0" maxOccurs="1"/>
+		<element type="BankDetails" minOccurs="0" maxOccurs="1"/>
+		<element type="CardDetails" minOccurs="0" maxOccurs="1"/>
+		<element type="SettlementBy" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+		<element type="SettlementDiscount" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TaxSubTotal" content="eltOnly" order="seq"><element type="TaxRate"/>
+		<element type="NumberOfLinesAtRate"/>
+		<element type="TotalValueAtRate"/>
+		<element type="SettlementDiscountAtRate" minOccurs="0" maxOccurs="1"/>
+		<element type="TaxableValueAtRate"/>
+		<element type="TaxAtRate"/>
+		<element type="NetPaymentAtRate"/>
+		<element type="GrossPaymentAtRate"/>
+		<element type="TaxCurrency"/>
+	</ElementType>
+	<ElementType name="TaxPointDate" content="textOnly"/>
+	<ElementType name="SettlementTerms" content="eltOnly" order="one"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+		<element type="PayByDate"/>
+		<element type="DaysFromInvoice" minOccurs="0" maxOccurs="1"/>
+		<element type="DaysFromMonthEnd" minOccurs="0" maxOccurs="1"/>
+		<element type="DaysFromDelivery" minOccurs="0" maxOccurs="1"/>
+		<element type="PaidDate" minOccurs="0" maxOccurs="1"/>
+		<element type="Description" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="SettlementMethod" content="textOnly"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="BankDetails" content="eltOnly" order="seq"><element type="BankCode"/>
+		<element type="BankReference"/>
+		<element type="GLN" minOccurs="0" maxOccurs="1"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="SettlementBy" content="eltOnly" order="seq"><element type="SettlementByReferences" minOccurs="0" maxOccurs="1"/>
+		<element type="Party" minOccurs="1" maxOccurs="*"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="Contact" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="SettlementDiscount" content="eltOnly" order="seq"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+		<element type="PercentDiscount" minOccurs="0" maxOccurs="1"/>
+		<element type="AmountDiscount"/>
+	</ElementType>
+	<ElementType name="BankCode" content="textOnly"/>
+	<ElementType name="BankReference" content="textOnly"/>
+	<ElementType name="NumberOfLinesAtRate" content="textOnly" dt:type="int"/>
+	<ElementType name="TotalValueAtRate" content="textOnly" dt:type="float"/>
+	<ElementType name="SettlementDiscountAtRate" content="textOnly" dt:type="float"/>
+	<ElementType name="TaxableValueAtRate" content="textOnly" dt:type="float"/>
+	<ElementType name="NetPaymentAtRate" content="textOnly" dt:type="float"/>
+	<ElementType name="GrossPaymentAtRate" content="textOnly" dt:type="float"/>
+	<ElementType name="AlternateCurrency" content="textOnly"><AttributeType name="Code" dt:type="string" required="yes"/>
+		<AttributeType name="Codelist" dt:type="string" default="ISO4217"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="TaxCurrency" content="eltOnly" order="seq"><element type="Currency"/>
+		<element type="AlternateCurrency" minOccurs="0" maxOccurs="1"/>
+		<element type="Rate" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="LotSerial" content="eltOnly" order="seq"><element type="LotSerialType"/>
+		<element type="LotSerialNumber"/>
+		<element type="Quantity" minOccurs="0" maxOccurs="1"/>
+		<element type="LotSerialDates" minOccurs="0" maxOccurs="*"/>
+		<element type="Narrative" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="LotSerialType" content="textOnly"><AttributeType name="Code" dt:type="string" required="yes"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="LotSerialNumber" content="textOnly"/>
+	<ElementType name="LotSerialDates" content="eltOnly" order="seq"><element type="BestBeforeDate" minOccurs="0" maxOccurs="1"/>
+		<element type="DeliveryDate" minOccurs="0" maxOccurs="1"/>
+		<element type="DespatchDate" minOccurs="0" maxOccurs="1"/>
+		<element type="OnSaleByDate" minOccurs="0" maxOccurs="1"/>
+		<element type="SellByDate" minOccurs="0" maxOccurs="1"/>
+		<element type="ShelfLifeDate" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="BestBeforeDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="DeliveryDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="DespatchDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="OnSaleByDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="SellByDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="ShelfLifeDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="CardDetails" content="eltOnly" order="seq"><AttributeType name="CardType" dt:type="enumeration" dt:values="Credit Debit Charge" required="yes"/>
+		<attribute type="CardType"/>
+		<element type="Issuer"/>
+		<element type="Party"/>
+		<element type="Address" minOccurs="0" maxOccurs="1"/>
+		<element type="IssueDate" minOccurs="0" maxOccurs="1"/>
+		<element type="ExpiryDate"/>
+		<element type="IssueNumber" minOccurs="0" maxOccurs="1"/>
+		<element type="CardNumber"/>
+		<element type="AuthorisationCode" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Issuer" content="textOnly"/>
+	<ElementType name="IssueDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="ExpiryDate" content="textOnly" dt:type="dateTime"/>
+	<ElementType name="IssueNumber" content="textOnly" dt:type="int"/>
+	<ElementType name="CardNumber" content="textOnly"/>
+	<ElementType name="ConsumerUnitCode" content="textOnly"/>
+	<ElementType name="NumberOfLines" content="textOnly" dt:type="int"/>
+	<ElementType name="NumberOfTaxRates" content="textOnly" dt:type="int"/>
+	<ElementType name="LineValueTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="NetPaymentTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="GrossPaymentTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="SuppliersInvoiceNumber" content="textOnly"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="TaxAtRate" content="textOnly"/>
+	<ElementType name="SettlementDiscountTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="TaxableTotal" content="textOnly" dt:type="float"/>
+	<ElementType name="OriginatingSoftware" content="eltOnly" order="seq"><element type="SoftwareManufacturer"/>
+		<element type="SoftwareProduct"/>
+		<element type="SoftwareVersion"/>
+	</ElementType>
+	<ElementType name="TestFlag" content="mixed" order="many"><AttributeType name="TestReference" dt:type="string"/>
+		<attribute type="TestReference"/>
+		<element type="Test"/>
+	</ElementType>
+	<ElementType name="SoftwareManufacturer" content="textOnly"/>
+	<ElementType name="SoftwareVersion" content="textOnly"/>
+	<ElementType name="SoftwareProduct" content="textOnly"/>
+	<ElementType name="Schema" content="eltOnly" order="seq"><element type="Version"/>
+	</ElementType>
+	<ElementType name="Stylesheet" content="eltOnly" order="seq"><element type="StylesheetOwner"/>
+		<element type="StylesheetName"/>
+		<element type="Version"/>
+		<element type="StylesheetType"/>
+	</ElementType>
+	<ElementType name="Parameters" content="eltOnly" order="seq"><element type="Language"/>
+		<element type="DecimalSeparator"/>
+		<element type="Precision"/>
+	</ElementType>
+	<ElementType name="Version" content="textOnly"/>
+	<ElementType name="StylesheetOwner" content="textOnly"/>
+	<ElementType name="StylesheetName" content="textOnly"/>
+	<ElementType name="StylesheetType" content="textOnly"/>
+	<ElementType name="Language" content="textOnly"/>
+	<ElementType name="DecimalSeparator" content="textOnly" dt:type="char"/>
+	<ElementType name="Precision" content="textOnly" dt:type="float"/>
+	<ElementType name="AuthorisationCode" content="textOnly"/>
+	<ElementType name="BuyersOrderLineReference" content="textOnly"><AttributeType name="Preserve" dt:type="enumeration" dt:values="true" default="true"/>
+		<attribute type="Preserve"/>
+	</ElementType>
+	<ElementType name="InvoiceToReferences" content="eltOnly" order="seq"><element type="GLN" minOccurs="0" maxOccurs="1"/>
+		<element type="SuppliersCodeForInvoiceTo" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="SettlementByReferences" content="eltOnly" order="seq"><element type="GLN" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Test" content="empty"><AttributeType name="ExpectedReply" dt:type="string"/>
+		<AttributeType name="Mode" dt:type="string" required="yes"/>
+		<attribute type="ExpectedReply"/>
+		<attribute type="Mode"/>
+	</ElementType>
+	<ElementType name="TypeOfSupply" content="textOnly" dt:type="string"/>
+	<ElementType name="Intrastat" content="eltOnly" order="seq"><element type="CommodityCode" minOccurs="0" maxOccurs="1"/>
+		<element type="CommodityDescription" minOccurs="0" maxOccurs="1"/>
+		<element type="NatureOfTransaction" minOccurs="0" maxOccurs="1"/>
+		<element type="SupplementaryUnits" minOccurs="0" maxOccurs="1"/>
+		<element type="CountryOfDestination" minOccurs="0" maxOccurs="1"/>
+		<element type="ModeOfTransport" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="CommodityCode" content="textOnly" dt:type="string"/>
+	<ElementType name="CommodityDescription" content="textOnly" dt:type="string"/>
+	<ElementType name="NatureOfTransaction" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string" default="10"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="SupplementaryUnits" content="textOnly" dt:type="int"/>
+	<ElementType name="CountryOfDestination" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string" default="GB"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="ModeOfTransport" content="textOnly" dt:type="string"><AttributeType name="Code" dt:type="string" default="1"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+	</ElementType>
+	<ElementType name="SuppliersCodeForInvoiceTo" content="textOnly"/>
+	<ElementType name="PayByDate" content="textOnly"/>
+	<ElementType name="DaysFromInvoice" content="textOnly"/>
+	<ElementType name="DaysFromMonthEnd" content="textOnly"/>
+	<ElementType name="DaysFromDelivery" content="textOnly"/>
+	<ElementType name="QualifyingTerms" content="eltOnly" order="one"><AttributeType name="Code" dt:type="string"/>
+		<AttributeType name="Codelist" dt:type="string" default="BASDA"/>
+		<attribute type="Code"/>
+		<attribute type="Codelist"/>
+		<element type="PayByDate"/>
+		<element type="DaysFromInvoice" minOccurs="0" maxOccurs="1"/>
+		<element type="DaysFromMonthEnd" minOccurs="0" maxOccurs="1"/>
+		<element type="DaysFromDelivery" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="PaidDate" content="textOnly" dt:type="date"/>
+</Schema>
