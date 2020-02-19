@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Invoice xsi:schemaLocation='urn:schemas-basda-org:2000:salesInvoice:xdr:3.01 http://www.ebis-xml.net/schemas/invoice-v3.xsd http://www.ebuild-xml.org.uk/projectReferences-v1 http://www.ebuild-xml.org.uk/schemas/projectReferences-v1.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:schemas-basda-org:2000:salesInvoice:xdr:3.01'>
+  <InvoiceHead>
+    <Schema>
+      <Version>3.02.1</Version>
+    </Schema>
+    <Stylesheet>
+      <StylesheetOwner>basda.org</StylesheetOwner>
+      <StylesheetName>BasdaEBuildOrder</StylesheetName>
+      <Version>1.00</Version>
+      <StylesheetType>xsl</StylesheetType>
+    </Stylesheet>
+    <Parameters>
+      <Language>en_GB</Language>
+      <DecimalSeparator>.</DecimalSeparator>
+      <Precision>20.2</Precision>
+    </Parameters>
+    <InvoiceType Code='INV'>Commercial Invoice</InvoiceType>
+    <InvoiceCurrency>
+      <Currency Code='GBP'>GB Pounds Sterling</Currency>
+    </InvoiceCurrency>
+    <Checksum>8455</Checksum>
+  </InvoiceHead>
+  <InvoiceReferences>
+    <ContractOrderReference>37601/3</ContractOrderReference>
+    <CostCentre>24</CostCentre>
+    <BuyersOrderNumber Preserve='true'>362000188811</BuyersOrderNumber>
+    <ProjectCode>3620</ProjectCode>
+    <SuppliersInvoiceNumber>954862</SuppliersInvoiceNumber>
+  </InvoiceReferences>
+  <InvoiceDate>2001-03-21</InvoiceDate>
+  <Supplier>
+    <SupplierReferences>
+      <BuyersCodeForSupplier>GEO100</BuyersCodeForSupplier>
+    </SupplierReferences>
+    <Party>Moores Furniture Group</Party>
+  </Supplier>
+  <Buyer>
+    <Party>Redrow Homes (Midlands) Ltd</Party>
+  </Buyer>
+  <InvoiceTo>
+    <Party>Redrow Homes (Midlands) Ltd</Party>
+  </InvoiceTo>
+  <InvoiceLine Action='Add'>
+    <LineNumber Preserve='true'>1</LineNumber>
+    <InvoiceLineReferences>
+      <ContractOrderReference>872</ContractOrderReference>
+      <OrderLineNumber>3</OrderLineNumber>
+      <BuyersOrderLineReference Preserve='true'>129600100799</BuyersOrderLineReference>
+    </InvoiceLineReferences>
+    <ProjectReferences xmlns='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+      <PlotNumber>420</PlotNumber>
+    </ProjectReferences>
+    <Product>
+      <SuppliersProductCode>210254</SuppliersProductCode>
+      <Description>CUTLERY TRAY WHITE 600MM LONG</Description>
+    </Product>
+    <Quantity UOMCodelist='UNECE' UOMCode='NMB' UOMDescription='Number'>
+      <Packsize>1</Packsize>
+      <Amount>2</Amount>
+    </Quantity>
+    <Price>
+      <UnitPrice>5.00</UnitPrice>
+    </Price>
+    <LineTax>
+      <MixedRateIndicator>0</MixedRateIndicator>
+      <TaxRate Code='S'>17.5</TaxRate>
+      <TaxValue>1.75</TaxValue>
+    </LineTax>
+    <LineTotal>10.00</LineTotal>
+    <Delivery />
+  </InvoiceLine>
+  <InvoiceLine Action='Add'>
+    <LineNumber Preserve='true'>2</LineNumber>
+    <InvoiceLineReferences>
+      <ContractOrderReference>872</ContractOrderReference>
+      <OrderLineNumber>4</OrderLineNumber>
+      <BuyersOrderLineReference Preserve='true'>129600101799</BuyersOrderLineReference>
+    </InvoiceLineReferences>
+    <ProjectReferences xmlns='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+      <PlotNumber>420</PlotNumber>
+    </ProjectReferences>
+    <Product>
+      <SuppliersProductCode>666254</SuppliersProductCode>
+      <Description>Blocks concrete</Description>
+    </Product>
+    <Quantity UOMCodelist='UNECE' UOMCode='NMB' UOMDescription='Number'>
+      <Packsize>1000</Packsize>
+      <Amount>20</Amount>
+    </Quantity>
+    <Price>
+      <Units>5000</Units>
+      <UnitPrice>10.00</UnitPrice>
+    </Price>
+    <LineTax>
+      <MixedRateIndicator>0</MixedRateIndicator>
+      <TaxRate Code='S'>17.5</TaxRate>
+      <TaxValue>7.00</TaxValue>
+    </LineTax>
+    <LineTotal>40.00</LineTotal>
+    <Delivery />
+  </InvoiceLine>
+  <InvoiceLine Action='Add'>
+    <LineNumber Preserve='true'>3</LineNumber>
+    <InvoiceLineReferences>
+      <ContractOrderReference>872</ContractOrderReference>
+      <OrderLineNumber>5</OrderLineNumber>
+      <BuyersOrderLineReference Preserve='true'>129600101799</BuyersOrderLineReference>
+    </InvoiceLineReferences>
+    <ProjectReferences xmlns='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+      <PlotNumber>420</PlotNumber>
+    </ProjectReferences>
+    <Product>
+      <SuppliersProductCode>666-666</SuppliersProductCode>
+      <Description>Bricks clay</Description>
+    </Product>
+    <Quantity UOMCodelist='UNECE' UOMCode='NMB' UOMDescription='Number'>
+      <Packsize>5000</Packsize>
+      <Amount>50</Amount>
+    </Quantity>
+    <Price>
+      <Units>5000</Units>
+      <UnitPrice>1.00</UnitPrice>
+    </Price>
+    <LineTax>
+      <MixedRateIndicator>0</MixedRateIndicator>
+      <TaxRate Code='S'>17.5</TaxRate>
+      <TaxValue>1.61</TaxValue>
+    </LineTax>
+    <LineTotal>50.00</LineTotal>
+    <Delivery />
+  </InvoiceLine>
+  <SpecialInstructions>
+    There are no special instructions.
+  </SpecialInstructions>
+  <Narrative>
+    This is the narrative.
+  </Narrative>
+  <Settlement>
+    <SettlementDiscount>
+      <PercentDiscount>
+        <Percentage>2.5</Percentage>
+      </PercentDiscount>
+      <AmountDiscount>
+        <Amount>0.00</Amount>
+      </AmountDiscount>
+    </SettlementDiscount>
+  </Settlement>
+  <TaxSubTotal>
+    <TaxRate Code='S'>17.5</TaxRate>
+    <NumberOfLinesAtRate>1</NumberOfLinesAtRate>
+    <TotalValueAtRate>100.00</TotalValueAtRate>
+    <SettlementDiscountAtRate>2.50</SettlementDiscountAtRate>
+    <TaxableValueAtRate>97.50</TaxableValueAtRate>
+    <TaxAtRate>17.06</TaxAtRate>
+    <NetPaymentAtRate>114.56</NetPaymentAtRate>
+    <GrossPaymentAtRate>117.06</GrossPaymentAtRate>
+    <TaxCurrency>
+      <Currency Code='GBP' Codelist='BASDA'>GB Pounds Sterling</Currency>
+    </TaxCurrency>
+  </TaxSubTotal>
+  <InvoiceTotal>
+    <NumberOfLines>3</NumberOfLines>
+    <NumberOfTaxRates>1</NumberOfTaxRates>
+    <LineValueTotal>100.00</LineValueTotal>
+    <SettlementDiscountTotal>2.50</SettlementDiscountTotal>
+    <TaxableTotal>97.50</TaxableTotal>
+    <TaxTotal>17.06</TaxTotal>
+    <NetPaymentTotal>114.56</NetPaymentTotal>
+    <GrossPaymentTotal>117.06</GrossPaymentTotal>
+  </InvoiceTotal>
+</Invoice>
+

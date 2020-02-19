@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns='urn:schemas-basda-org:2000:salesInvoice:xdr:3.01' xmlns:xdr='http://www.decisionsoft.com/XDR-compat-v1' elementFormDefault='qualified' xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:schemas-basda-org:2000:salesInvoice:xdr:3.01' attributeFormDefault='unqualified' id='eBIS-XMLInvoice'>
+  <xsd:import schemaLocation='eBUILD_XDR-compat-v1.xsd' namespace='http://www.decisionsoft.com/XDR-compat-v1' />
+  <xsd:element name='Invoice'>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name='InvoiceHead' minOccurs='1' maxOccurs='1'>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name='Schema' type='Schema' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='Stylesheet' type='Stylesheet' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='Parameters' type='Parameters' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='OriginatingSoftware' type='OriginatingSoftware' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='TestFlag' type='TestFlag' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='InvoiceType' type='InvoiceType' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='Function' type='Invoice_Function' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='InvoiceCurrency' type='InvoiceCurrency' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='Intrastat' type='Intrastat' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='Checksum' type='xdr:int' minOccurs='1' maxOccurs='1' />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name='InvoiceReferences' type='InvoiceReferencesType' minOccurs='1' maxOccurs='1' />
+        <xsd:any minOccurs='0' namespace='##other' processContents='strict'>
+          <xsd:annotation>
+            <xsd:documentation>This node allows extension of the eBIS XML spec.  Project specific data from other namespaces may be inserted at this point</xsd:documentation>
+          </xsd:annotation>
+        </xsd:any>
+        <xsd:element name='InvoiceDate' type='xdr:dateTime' minOccurs='1' maxOccurs='1' />
+        <xsd:element name='TypeOfSupply' type='xsd:string' minOccurs='0' maxOccurs='1' />
+        <xsd:element name='TaxPointDate' type='xsd:string' minOccurs='0' maxOccurs='1' />
+        <xsd:element name='Supplier' type='Supplier' minOccurs='1' maxOccurs='1' />
+        <xsd:element name='Buyer' type='Buyer' minOccurs='0' maxOccurs='1' />
+        <xsd:element name='Delivery' type='ebisDelivery' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element name='InvoiceTo' type='InvoiceTo' minOccurs='1' maxOccurs='1' />
+        <xsd:element name='InvoiceLine' type='InvoiceLine' minOccurs='1' maxOccurs='unbounded' />
+        <xsd:element name='PercentDiscount' type='PercentDiscount_Invoice' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element name='AmountDiscount' type='AmountDiscount' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element name='SpecialInstructions' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element name='Narrative' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element name='Settlement' minOccurs='0' maxOccurs='1'>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name='SettlementTerms' minOccurs='0' maxOccurs='1'>
+                <xsd:complexType>
+                  <xsd:annotation>
+                    <xsd:documentation>If a codelist is to be used then the code defines an elapsed time from invoice or delivery, the child element Description should be used to describe this. If the code value is "Date", the element PayByDate should be used in the same format as other date fields.</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:sequence>
+                    <xsd:choice>
+                      <xsd:element name='PayByDate' type='xsd:string' minOccurs='1' maxOccurs='1' />
+                      <xsd:element name='DaysFromInvoice' type='xsd:string' minOccurs='0' maxOccurs='1' />
+                      <xsd:element name='DaysFromMonthEnd' type='xsd:string' minOccurs='0' maxOccurs='1' />
+                      <xsd:element name='DaysFromDelivery' type='xsd:string' minOccurs='0' maxOccurs='1' />
+                      <xsd:element name='PaidDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                      <xsd:element name='Description' type='xsd:string' minOccurs='0' maxOccurs='1' />
+                    </xsd:choice>
+                  </xsd:sequence>
+                  <xsd:attribute name='Code' type='xsd:string' use='optional' />
+                  <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name='SettlementMethod' minOccurs='0' maxOccurs='1'>
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base='xsd:string'>
+                      <xsd:attribute name='Code' type='xsd:string' use='optional' />
+                      <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name='BankDetails' minOccurs='0' maxOccurs='1'>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name='BankCode' type='xsd:string' minOccurs='1' maxOccurs='1' />
+                    <xsd:element name='BankReference' type='xsd:string' minOccurs='1' maxOccurs='1' />
+                    <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+                      <xsd:annotation>
+                        <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+                    <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name='CardDetails' type='CardDetails' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='SettlementBy' minOccurs='0' maxOccurs='1'>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name='SettlementByReferences' minOccurs='0' maxOccurs='1'>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+                            <xsd:annotation>
+                              <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+                    <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+                    <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+              <xsd:element name='SettlementDiscount' minOccurs='0' maxOccurs='unbounded'>
+                <xsd:complexType>
+                  <xsd:annotation>
+                    <xsd:documentation>If the code defines an elapsed time from invoice, delivery or month end, the element text describes this. If the code value is "Date", the element text is the date in the same format as other date fields.</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:sequence>
+                    <xsd:element name='PercentDiscount' type='PercentDiscount_Invoice' minOccurs='0' maxOccurs='1' />
+                    <xsd:element name='AmountDiscount' type='AmountDiscount' minOccurs='1' maxOccurs='1' />
+                  </xsd:sequence>
+                  <xsd:attribute name='Code' type='xsd:string' use='optional' />
+                  <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name='TaxSubTotal' minOccurs='1' maxOccurs='unbounded'>
+          <xsd:complexType>
+            <xsd:annotation>
+              <xsd:documentation>One instance for each individual tax rate used</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+              <xsd:element name='TaxRate' type='TaxRate' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='NumberOfLinesAtRate' type='xdr:int' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='TotalValueAtRate' type='xdr:float' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Sum of LineTotals in InvoiceLines charged at this rate. Value A in tax calculations</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='SettlementDiscountAtRate' type='xdr:float' minOccurs='0' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Value of settlement discount associated with the TotalValueAtRate. Value B in tax calculations.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='TaxableValueAtRate' type='xdr:float' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Goods value to which tax rate is applied.  C = A-B</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='TaxAtRate' type='xsd:string' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Tax based on the taxable value with or without settlement discount according to the tax treatment of settlement discounts.  D = A*V/100 or D = C*V/100 according to the tax treatment of settlement discounts.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='NetPaymentAtRate' minOccurs='1' maxOccurs='1'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:annotation>
+                      <xsd:documentation>Value less settlement discount. E = C+D</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:pattern value='(0?([1-9][0-9]*|0)(\.[0-9]+)?)?' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name='GrossPaymentAtRate' minOccurs='1' maxOccurs='1'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:annotation>
+                      <xsd:documentation>Value before settlement discount.  F = A+D</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:pattern value='(0?([1-9][0-9]*|0)(\.[0-9]+)?)?' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name='TaxCurrency' minOccurs='1' maxOccurs='1'>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name='Currency' type='Currency' minOccurs='1' maxOccurs='1' />
+                    <xsd:element name='AlternateCurrency' type='AlternateCurrency' minOccurs='0' maxOccurs='1' />
+                    <xsd:element name='Rate' type='Rate' minOccurs='0' maxOccurs='1' />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name='InvoiceTotal' minOccurs='1' maxOccurs='1'>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name='NumberOfLines' type='xdr:int' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='NumberOfTaxRates' type='xdr:int' minOccurs='1' maxOccurs='1' />
+              <xsd:element name='LineValueTotal' type='xdr:float' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Value A in calculations</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='FreightCharges' type='xdr:float' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='MiscCharges' type='xdr:float' minOccurs='0' maxOccurs='1' />
+              <xsd:element name='SettlementDiscountTotal' type='xdr:float' minOccurs='0' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Value B in calculations</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='TaxableTotal' type='xdr:float' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>C = A-B</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='TaxTotal' type='xdr:float' minOccurs='1' maxOccurs='1'>
+                <xsd:annotation>
+                  <xsd:documentation>Sum of TaxAtRate values from TaxSubTotal records. Value D in calculations.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='NetPaymentTotal' minOccurs='1' maxOccurs='1'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:annotation>
+                      <xsd:documentation>Total payment with settlement discount. E = C+D </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:pattern value='(0?([1-9][0-9]*|0)(\.[0-9]+)?)?' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name='GrossPaymentTotal' minOccurs='1' maxOccurs='1'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:annotation>
+                      <xsd:documentation>Total invoice value before settlement discount. F=A+D</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:pattern value='(0?([1-9][0-9]*|0)(\.[0-9]+)?)?' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name='Schema'>
+    <xsd:sequence>
+      <xsd:element name='Version' type='xsd:string' minOccurs='1' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Stylesheet'>
+    <xsd:sequence>
+      <xsd:element name='StylesheetOwner' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='StylesheetName' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='Version' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='StylesheetType' type='xsd:string' minOccurs='1' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Parameters'>
+    <xsd:sequence>
+      <xsd:element name='Language' minOccurs='1' maxOccurs='1'>
+        <xsd:simpleType>
+          <xsd:restriction base='xsd:string'>
+            <xsd:annotation>
+              <xsd:documentation>This is a two character lower case ISO 639 code, optionally followed by a dash and two character upper case ISO 3166 country code. e.g. "en" or "en-US"</xsd:documentation>
+            </xsd:annotation>
+            <xsd:pattern value='[a-z]{2}([_\-][A-Z]{2})?' />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name='DecimalSeparator' minOccurs='1' maxOccurs='1'>
+        <xsd:simpleType>
+          <xsd:restriction base='xsd:string'>
+            <xsd:annotation>
+              <xsd:documentation>The separator between the integer and decimal part of a number. "." or ","</xsd:documentation>
+            </xsd:annotation>
+            <xsd:maxLength value='1' />
+            <xsd:minLength value='1' />
+            <xsd:enumeration value=',' />
+            <xsd:enumeration value='.' />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name='Precision' type='xdr:float' minOccurs='1' maxOccurs='1'>
+        <xsd:annotation>
+          <xsd:documentation>The precision of decimal values. e.g. 20.3 indicates up to 20 digits before the decimal separator and up to three after.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='OriginatingSoftware'>
+    <xsd:sequence>
+      <xsd:element name='SoftwareManufacturer' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='SoftwareProduct' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='SoftwareVersion' type='xsd:string' minOccurs='1' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='TestFlag'>
+    <xsd:sequence>
+      <xsd:element name='Test' minOccurs='0' maxOccurs='unbounded'>
+        <xsd:complexType>
+          <xsd:attribute name='ExpectedReply' type='xsd:string' use='optional' />
+          <xsd:attribute name='Mode' type='xsd:string' use='required' />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name='TestReference' type='xsd:string' use='optional'>
+      <xsd:annotation>
+        <xsd:documentation>This is the developer's reference, which will be returned in the test response.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceType'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:annotation>
+          <xsd:documentation>Invoice Classification Description</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name='Code' type='xsd:string' use='optional' />
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='Invoice_Function'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:attribute name='Code' type='xsd:string' use='optional' />
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceCurrency'>
+    <xsd:sequence>
+      <xsd:element name='Currency' type='Currency' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='AlternateCurrency' type='AlternateCurrency' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Rate' type='Rate' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Currency'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+        <xsd:attribute name='Code' type='xsd:string' use='required' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='AlternateCurrency'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:attribute name='Code' type='xsd:string' use='required' />
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='Rate'>
+    <xsd:simpleContent>
+      <xsd:extension base='xdr:float'>
+        <xsd:annotation>
+          <xsd:documentation>If the CalculationType is "M" then AltInvoiceCurrency = Currency x Rate. If it is "D" then divide instead.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name='CalculationType' use='required'>
+          <xsd:simpleType>
+            <xsd:restriction base='xsd:string'>
+              <xsd:enumeration value='D' />
+              <xsd:enumeration value='M' />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='Intrastat'>
+    <xsd:sequence>
+      <xsd:element name='CommodityCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CommodityDescription' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='NatureOfTransaction' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='SupplementaryUnits' type='xdr:int' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CountryOfDestination' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='ModeOfTransport' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceReferencesType'>
+    <xsd:sequence>
+      <xsd:element name='ContractOrderReference' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CostCentre' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='BuyersOrderNumber' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Department' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='GeneralLedgerCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='ProjectCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='ProjectAnalysisCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='SuppliersInvoiceNumber' minOccurs='1' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Supplier'>
+    <xsd:sequence>
+      <xsd:element name='SupplierReferences' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='BuyersCodeForSupplier' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='TaxNumber' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+              <xsd:annotation>
+                <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+      <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Address'>
+    <xsd:sequence>
+      <xsd:element name='AddressLine' type='xsd:string' minOccurs='0' maxOccurs='unbounded'>
+        <xsd:annotation>
+          <xsd:documentation>Free format address lines may be used instead of (or in addition to) specific Street etc elements.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name='Street' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='City' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='State' type='xsd:string' minOccurs='0' maxOccurs='1'>
+        <xsd:annotation>
+          <xsd:documentation>State/County/Province</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name='PostCode' type='xsd:string' minOccurs='0' maxOccurs='1'>
+        <xsd:annotation>
+          <xsd:documentation>Post/ZIP code</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name='Country' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Contact'>
+    <xsd:sequence>
+      <xsd:element name='Name' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Department' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='InternalAddress' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='DDI' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Switchboard' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Fax' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Telex' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Email' minOccurs='0' maxOccurs='1'>
+        <xsd:simpleType>
+          <xsd:restriction base='xsd:string'>
+            <xsd:pattern value='.*@.*\..*' />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name='Mobile' type='xsd:string' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Buyer'>
+    <xsd:sequence>
+      <xsd:element name='BuyerReferences' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='SuppliersCodeForBuyer' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='TaxNumber' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+              <xsd:annotation>
+                <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+      <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='ebisDelivery'>
+    <xsd:sequence>
+      <xsd:element name='DeliverTo' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='DeliverToReferences' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name='BuyersCodeForDelivery' minOccurs='0' maxOccurs='1'>
+                    <xsd:complexType>
+                      <xsd:simpleContent>
+                        <xsd:extension base='xsd:string'>
+                          <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+                        </xsd:extension>
+                      </xsd:simpleContent>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name='BuyersCodeForLocation' type='xsd:string' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+                    <xsd:annotation>
+                      <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+            <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='Location' type='xsd:string' minOccurs='0' maxOccurs='1'>
+              <xsd:annotation>
+                <xsd:documentation>Location within address.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Carrier' type='Carrier' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Quantity' type='Quantity' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='EarliestAcceptableDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='LatestAcceptableDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='PreferredDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='SpecialInstructions' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='DeliveryInformation' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='Narrative' type='xsd:string' minOccurs='0' maxOccurs='unbounded'>
+        <xsd:annotation>
+          <xsd:documentation>Use for any general narrative comments.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Carrier'>
+    <xsd:sequence>
+      <xsd:element name='CarrierReferences' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='BuyersCodeForCarrier' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+              <xsd:annotation>
+                <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+      <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Quantity'>
+    <xsd:sequence>
+      <xsd:element name='Packsize' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Amount' type='xdr:float' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceTo'>
+    <xsd:sequence>
+      <xsd:element name='InvoiceToReferences' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='GLN' type='xsd:string' minOccurs='0' maxOccurs='1'>
+              <xsd:annotation>
+                <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name='SuppliersCodeForInvoiceTo' type='xsd:string' minOccurs='0' maxOccurs='1' />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='unbounded' />
+      <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Contact' type='Contact' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceLine'>
+    <xsd:sequence>
+      <xsd:element name='LineNumber' minOccurs='1' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xdr:int'>
+              <xsd:annotation>
+                <xsd:documentation>The line number must be included as a reference in documents relating to this transaction.</xsd:documentation>
+              </xsd:annotation>
+              <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='InvoiceLineReferences' type='InvoiceLineReferences' minOccurs='0' maxOccurs='1' />
+      <xsd:any minOccurs='0' namespace='##other' processContents='strict'>
+        <xsd:annotation>
+          <xsd:documentation>This node allows extension of the eBIS XML spec.  Project specific data from other namespaces may be inserted at this point</xsd:documentation>
+        </xsd:annotation>
+      </xsd:any>
+      <xsd:element name='Product' type='Product' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='Quantity' type='Quantity' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Price' minOccurs='1' maxOccurs='unbounded'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='Units' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='UnitPrice' type='xdr:float' minOccurs='1' maxOccurs='1' />
+            <xsd:element name='SpecialPriceDescription' type='xsd:string' minOccurs='0' maxOccurs='1' />
+          </xsd:sequence>
+          <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+          <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+          <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='PercentDiscount' type='PercentDiscount_Invoice' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='AmountDiscount' type='AmountDiscount' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='LineTax' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='MixedRateIndicator' type='xsd:string' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='TaxRate' type='TaxRate' minOccurs='1' maxOccurs='1' />
+            <xsd:element name='TaxValue' type='xdr:float' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='TaxRef' type='TaxRef' minOccurs='0' maxOccurs='1' />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='LineTotal' type='xdr:float' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='Delivery' type='ebisDelivery' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='InvoiceLineInformation' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='ExtendedDescription' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='Narrative' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='LotSerial' minOccurs='0' maxOccurs='unbounded'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='LotSerialType' minOccurs='1' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xsd:string'>
+                    <xsd:attribute name='Code' type='xsd:string' use='required' />
+                    <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='LotSerialNumber' type='xsd:string' minOccurs='1' maxOccurs='1' />
+            <xsd:element name='Quantity' type='Quantity' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='LotSerialDates' minOccurs='0' maxOccurs='unbounded'>
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name='BestBeforeDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='DeliveryDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='DespatchDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='OnSaleByDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='SellByDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                  <xsd:element name='ShelfLifeDate' type='xdr:dateTime' minOccurs='0' maxOccurs='1' />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Narrative' type='xsd:string' minOccurs='0' maxOccurs='unbounded' />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Intrastat' type='Intrastat' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+    <xsd:attribute name='Action' use='optional'>
+      <xsd:simpleType>
+        <xsd:restriction base='xsd:string'>
+          <xsd:enumeration value='Add' />
+          <xsd:enumeration value='Change' />
+          <xsd:enumeration value='Delete' />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name='TypeCode' type='xsd:string' use='optional' />
+    <xsd:attribute name='TypeDescription' type='xsd:string' use='optional' />
+    <xsd:attribute name='TypeCodelist' type='xsd:string' use='optional' />
+  </xsd:complexType>
+  <xsd:complexType name='InvoiceLineReferences'>
+    <xsd:sequence>
+      <xsd:element name='ContractOrderReference' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CostCentre' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='GeneralLedgerCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='ProjectCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:annotation>
+                <xsd:documentation>This value should be included as a reference in documents relating to this transaction.</xsd:documentation>
+              </xsd:annotation>
+              <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='ProjectAnalysisCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:annotation>
+                <xsd:documentation>This value should be included as a reference in documents relating to this transaction.</xsd:documentation>
+              </xsd:annotation>
+              <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='BuyersOrderNumber' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:annotation>
+                <xsd:documentation>This field must be included in either the InvoiceReferences or InvoiceLineReferences</xsd:documentation>
+              </xsd:annotation>
+              <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='OrderLineNumber' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='BuyersOrderLineReference' type='BuyersOrderLineReference' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='BuyersOrderLineReference'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:attribute name='Preserve' use='optional'>
+          <xsd:simpleType>
+            <xsd:restriction base='xsd:string'>
+              <xsd:enumeration value='true' />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='Product'>
+    <xsd:sequence>
+      <xsd:element name='SuppliersProductCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='BuyersProductCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='TradedUnitCode' type='xsd:string' minOccurs='0' maxOccurs='1'>
+        <xsd:annotation>
+          <xsd:documentation>Number conformant to UCC.EAN specification.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name='ConsumerUnitCode' type='xsd:string' minOccurs='0' maxOccurs='1'>
+        <xsd:annotation>
+          <xsd:documentation>EAN-13 barcode number.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name='Description' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Properties' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:annotation>
+            <xsd:documentation>Other properties (such as "Fitting") can be added as extensions by the user.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:sequence>
+            <xsd:element name='Quantity' type='Quantity' minOccurs='0' maxOccurs='1' />
+            <xsd:element name='Length' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xsd:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Width' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Depth' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Weight' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Volume' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Height' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Size' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xdr:float'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name='Color' minOccurs='0' maxOccurs='1'>
+              <xsd:complexType>
+                <xsd:simpleContent>
+                  <xsd:extension base='xsd:string'>
+                    <xsd:attribute name='UOMDescription' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCode' type='xsd:string' use='optional' />
+                    <xsd:attribute name='UOMCodelist' type='xsd:string' use='optional' />
+                  </xsd:extension>
+                </xsd:simpleContent>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='PercentDiscount_Invoice'>
+    <xsd:sequence>
+      <xsd:element name='QualifyingTerms' type='QualifyingTerms' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Type' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Percentage' type='xdr:float' minOccurs='1' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='QualifyingTerms'>
+    <xsd:annotation>
+      <xsd:documentation>If a codelist is to be used then the code defines an elapsed time from invoice or delivery, the child element Description should be used to describe this. If the code value is "Date", the element PayByDate should be used in the same format as other date fields</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name='PayByDate' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='DaysFromInvoice' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='DaysFromMonthEnd' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='DaysFromDelivery' type='xsd:string' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+    <xsd:attribute name='Code' type='xsd:string' use='optional' />
+    <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+  </xsd:complexType>
+  <xsd:complexType name='AmountDiscount'>
+    <xsd:sequence>
+      <xsd:element name='QualifyingTerms' type='QualifyingTerms' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='Type' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Code' type='xsd:string' use='optional' />
+              <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Amount' type='xdr:float' minOccurs='1' maxOccurs='1' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='TaxRate'>
+    <xsd:simpleContent>
+      <xsd:extension base='xdr:float'>
+        <xsd:annotation>
+          <xsd:documentation>Value V in tax calculations. Code meanings: Standard(S), Zero(Z), Exempt(E), Lower Rate(L), Higher Rate(H), Other(N).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name='Code' type='xsd:string' use='required' />
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='TaxRef'>
+    <xsd:simpleContent>
+      <xsd:extension base='xsd:string'>
+        <xsd:attribute name='Code' type='xsd:string' use='optional' />
+        <xsd:attribute name='Codelist' type='xsd:string' use='optional' />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name='CardDetails'>
+    <xsd:sequence>
+      <xsd:element name='Issuer' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='Party' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='Address' type='Address' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='IssueDate' type='xsd:date' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='ExpiryDate' type='xsd:date' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='IssueNumber' type='xsd:int' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CardNumber' type='xsd:string' minOccurs='1' maxOccurs='1' />
+      <xsd:element name='AuthorisationCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+    </xsd:sequence>
+    <xsd:attribute name='CardType' use='required'>
+      <xsd:simpleType>
+        <xsd:restriction base='xsd:string'>
+          <xsd:enumeration value='Charge' />
+          <xsd:enumeration value='Credit' />
+          <xsd:enumeration value='Debit' />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+</xsd:schema>
+

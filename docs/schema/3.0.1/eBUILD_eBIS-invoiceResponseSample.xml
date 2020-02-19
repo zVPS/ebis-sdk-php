@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<InvoiceResponse xsi:schemaLocation='invoiceResponse-v0.1.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://www.ebis-xml.net/invoiceResponse-v0.1'>
+  <InvoiceReferences>
+    <ContractOrderReference>37601/3</ContractOrderReference>
+    <CostCentre>24</CostCentre>
+    <BuyersOrderNumber>998877665544</BuyersOrderNumber>
+    <ProjectCode>3620</ProjectCode>
+    <SuppliersInvoiceNumber>954987</SuppliersInvoiceNumber>
+  </InvoiceReferences>
+  <DateReceived>2001-10-11</DateReceived>
+</InvoiceResponse>
+

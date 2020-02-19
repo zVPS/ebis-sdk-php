@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+
+<xsd:schema id='eBuild_ProjectReferences' version='1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' targetNamespace='http://www.ebuild-xml.org.uk/projectReferences-v1' xmlns='http://www.ebuild-xml.org.uk/projectReferences-v1' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:doc='urn:schemas-basda-org:schema-extensions:documentation'>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <doc:Metadata>
+        <doc:Title>eBuild-XML Project References</doc:Title>
+        <doc:Subject>eBuild-XML extension to eBIS-XML</doc:Subject>
+        <doc:Version>
+          <doc:Number>1.01</doc:Number>
+          <doc:Status>Production</doc:Status>
+        </doc:Version>
+        <doc:Author>S J Baker</doc:Author>
+        <doc:ModificationDate>14 Mar 05</doc:ModificationDate>
+        <doc:Note>This revision adds metadata and makes no other changes.</doc:Note>
+      </doc:Metadata>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:complexType name='HouseType'>
+    <xsd:sequence>
+      <xsd:element name='BuyersCode' minOccurs='0'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:annotation>
+                <xsd:documentation>The unique reference for this type of house/flat.  It will normally identify the correct set of working drawings.  Mandatory when ordering in house sets.</xsd:documentation>
+              </xsd:annotation>
+              <xsd:attribute name='Preserve' type='xsd:boolean' use='optional' />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Details' minOccurs='0'>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name='Elevation' type='xsd:string' minOccurs='0' />
+            <xsd:element name='SpecificationLevel' type='xsd:string' minOccurs='0' />
+            <xsd:element name='StandardDescription' type='xsd:string'>
+              <xsd:annotation>
+                <xsd:documentation>The generic sales name for the house/flat.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name='SiteLocation' type='xsd:string' >
+    <xsd:annotation>
+      <xsd:documentation>Where the product is required on site e.g. direct to plot, the compound or the North East corner etc.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name='ProjectReferences'>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name='NameOfProjectOrDevelopment' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>The marketing name of the site or development.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref='SiteLocation' minOccurs='0'/>
+        <xsd:element name='BlockReference' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>Block reference in a development typically comprising several blocks of flats.  Should be used where plot number is not unique or absent all together.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='FloorLevel' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>The floor level for which this order applies, read in conjunction with other building refs. e.g. plot &amp; block numbers.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='HouseType' type='HouseType' minOccurs='0' />
+        <xsd:element name='CustomerChoice' minOccurs='0'>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name='Choose' maxOccurs='unbounded'>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name='ItemDescription' type='xsd:string'>
+                      <xsd:annotation>
+                        <xsd:documentation>Describes the customer's choice e.g. green bathroom suite, tile ref. AS23 etc.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name='Choice' type='xsd:string'>
+                      <xsd:annotation>
+                        <xsd:documentation>This describes what the customer had to choose.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name='ConstructionStage' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>The programmed stage of build this order relates to e.g. 2nd lift brickwork.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='OrderSets' minOccurs='0'>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name='RequiredForThisOrderOrLine' type='xsd:string'>
+                <xsd:annotation>
+                  <xsd:documentation>YES implies ordering a house set of material defined by Product Group for the plot number and house type. NO implies a need to look to the narrative, Suppliers Product Code, Description, EAN no. for product detail.  May apply to the whole order or just a particular order line.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name='BuyersNameForOrderSet' type='xsd:string' minOccurs='0'>
+                <xsd:annotation>
+                  <xsd:documentation>Where the buyer has a name or code for an order set it is inserted here.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element ref='PlotNumber' minOccurs='0' />
+        <xsd:element name='Handing' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>Qualifies the house type.  Use "as" for as drawing and "opp" for opposite to drawing.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='ProductGroup' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>The generic type of product being ordered e.g. kitchen units, roof trusses, windows etc.  Identifies the nature of the order set so is mandatory when order is in house sets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='DrawingNumber' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>The architects drawing number where details of the ordered items are specified.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='WorkBreakdownStructure' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation> A reference to the activity stage during which the ordered item is fixed e.g. "bricks to wall plate", "1st fix plumbing".</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='PartialInvoiceLine' minOccurs='0'>
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base='xsd:boolean'>
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that this is partial InvoiceLine.  The last partial InvoiceLine should have the FinalInvoice attribute set</xsd:documentation>
+                </xsd:annotation>
+                <xsd:attribute name='FinalInvoice' type='xsd:boolean' use='required'>
+                  <xsd:annotation>
+                    <xsd:documentation>Indicates that this is the final InvoiceLine in an invoice line set.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:attribute>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name='Narrative' type='xsd:string' minOccurs='0'>
+          <xsd:annotation>
+            <xsd:documentation>Use for any general narrative comments.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name='PlotNumber' >
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base='xsd:string'>
+          <xsd:attribute name='Preserve' type='xsd:boolean' use='optional'>
+            <xsd:annotation>
+              <xsd:documentation>The unique plot number for a house/flat.  Mandatory where the order is in house sets.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

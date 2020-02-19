@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema version='3.09' elementFormDefault='qualified' attributeFormDefault='unqualified' id='eBIS-XML_Order' targetNamespace='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:doc='urn:schemas-basda-org:schema-extensions:documentation'>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <doc:Metadata>
+        <doc:Title>eBIS-XML Order</doc:Title>
+        <doc:Subject>eBIS-XML Order superset</doc:Subject>
+        <doc:Version>
+          <doc:Number>3.09</doc:Number>
+          <doc:Status>Production</doc:Status>
+        </doc:Version>
+        <doc:Author>S J Baker</doc:Author>
+        <doc:ModificationDate>16 Mar 04</doc:ModificationDate>
+        <doc:Note>This is the eBIS-XML superset Order, based on the eBIS-XML component library.</doc:Note>
+        <doc:Note>Orders conformant to eBIS-XML v3.08 will conform to this definition.</doc:Note>
+      </doc:Metadata>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:include schemaLocation='CoreTypes-v3.xsd' />
+  <xsd:include schemaLocation='CoreStructures-v3.xsd' />
+  <xsd:element name='Order'>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref='OrderHead' />
+        <xsd:element ref='OrderReferences' minOccurs='0' />
+        <xsd:choice>
+          <xsd:element ref='Extensions' minOccurs='0' />
+          <xsd:any processContents='lax' minOccurs='0' maxOccurs='unbounded' namespace='##other' />
+        </xsd:choice>
+        <xsd:element ref='OrderDate' />
+        <xsd:element ref='Supplier' />
+        <xsd:element ref='Originator' minOccurs='0' />
+        <xsd:element ref='Buyer' minOccurs='0' />
+        <xsd:element ref='Delivery' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='InvoiceTo' minOccurs='0' />
+        <xsd:element ref='OrderLine' maxOccurs='unbounded' />
+        <xsd:element ref='PercentDiscount' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='AmountDiscount' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='SpecialInstructions' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='Narrative' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='Settlement' minOccurs='0' />
+        <xsd:element ref='TaxSubTotal' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='OrderTotal' minOccurs='0' />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

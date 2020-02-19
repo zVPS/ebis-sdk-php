@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+********************************************************************************
+                                  WARNING
+This is a development schema, which illustrates how the eBIS-XML v3 component
+library can be used to derive a functional subset from full eBIS-XML v3. 
+********************************************************************************
+PURPOSE OF THIS SCHEMA
+This schema defines the core superset eBIS-XML Order but insists that all
+Preserve attributes are used.
+HOW TO READ THIS SCHEMA
+  + First, the usual schema element appears.  
+  + We then use the XML Schema redefine element to include the library while
+  allowing component redefinition. 
+  + We redefine the attribute group for the Preserve attribute, which is used
+  across the library, so that the attribute is required.
+  + The full, library-based definition of Order is provided.
+  -->
+<xsd:schema version='3.09' elementFormDefault='qualified' attributeFormDefault='unqualified' id='eBIS-XML_Order_mustPreserve' targetNamespace='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:doc='urn:schemas-basda-org:schema-extensions:documentation'>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <doc:Metadata>
+        <doc:Title>eBIS-XML Order (mandatory preserve nodes)</doc:Title>
+        <doc:Subject>eBIS-XML example derived document definitions: must preserve selected items.</doc:Subject>
+        <doc:Version>
+          <doc:Number>3.09</doc:Number>
+          <doc:Status>Example schema</doc:Status>
+        </doc:Version>
+        <doc:Author>S J Baker</doc:Author>
+        <doc:ModificationDate>16 Mar 04</doc:ModificationDate>
+        <doc:Note>This schema provides the eBIS-XML superset Order definition but it makes Preserve attributes mandatory wherever they may appear.</doc:Note>
+        <doc:Note>Please see the comments in the schema file for further information on deriving subsets of eBIS-XML.</doc:Note>
+        <doc:Warning>This schema illustrates how the eBIS-XML v3 component library can be used to derive a functional subset from full eBIS-XML v3. It is indicative only.</doc:Warning>
+      </doc:Metadata>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:include schemaLocation='CoreTypes-v3.xsd' />
+  <xsd:redefine schemaLocation='CoreStructures-v3.xsd'>
+<!--
+    The Preserve attribute is now required wherever it may appear.
+  -->
+    <xsd:attributeGroup name='PreserveAttrGroup'>
+      <xsd:attribute name='Preserve' type='PreserveType' use='required' />
+    </xsd:attributeGroup>
+  </xsd:redefine>
+  <xsd:element name='Order'>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref='OrderHead' />
+        <xsd:element ref='OrderReferences' minOccurs='0' />
+        <xsd:choice>
+          <xsd:element ref='Extensions' minOccurs='0' />
+          <xsd:any processContents='lax' minOccurs='0' maxOccurs='unbounded' namespace='##other' />
+        </xsd:choice>
+        <xsd:element ref='OrderDate' />
+        <xsd:element ref='Supplier' />
+        <xsd:element ref='Originator' minOccurs='0' />
+        <xsd:element ref='Buyer' minOccurs='0' />
+        <xsd:element ref='Delivery' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='InvoiceTo' minOccurs='0' />
+        <xsd:element ref='OrderLine' maxOccurs='unbounded' />
+        <xsd:element ref='PercentDiscount' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='AmountDiscount' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='SpecialInstructions' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='Narrative' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='Settlement' minOccurs='0' />
+        <xsd:element ref='TaxSubTotal' minOccurs='0' maxOccurs='unbounded' />
+        <xsd:element ref='OrderTotal' minOccurs='0' />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

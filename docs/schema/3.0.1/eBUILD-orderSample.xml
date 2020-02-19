@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Order 
+  xsi:schemaLocation='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01 eBUILD_orderSchema_v3.01 projectReferences-v1.xsd' 
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+  xmlns='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01'>
+  <OrderHead>
+    <Schema>
+      <Version>3.02.1</Version>
+    </Schema>
+    <Stylesheet>
+      <StylesheetOwner>redrow.co.uk</StylesheetOwner>
+      <StylesheetName>RedrowOrder</StylesheetName>
+      <Version>1.01</Version>
+      <StylesheetType>xsl</StylesheetType>
+    </Stylesheet>
+    <Parameters>
+      <Language>en_GB</Language>
+      <DecimalSeparator>.</DecimalSeparator>
+      <Precision>20.3</Precision>
+    </Parameters>
+    <OriginatingSoftware>
+      <SoftwareManufacturer>Redrow</SoftwareManufacturer>
+      <SoftwareProduct>Order Generator</SoftwareProduct>
+      <SoftwareVersion>1.01</SoftwareVersion>
+    </OriginatingSoftware>
+    <TestFlag />
+    <OrderType Code='CAO' Codelist='BASDA'>Call Off Order</OrderType>
+    <OrderCurrency>
+      <Currency Code='GBP' Codelist='BASDA'>GB Pounds Sterling</Currency>
+    </OrderCurrency>
+    <Checksum>1234</Checksum>
+  </OrderHead>
+  <OrderReferences>
+    <CostCentre>02</CostCentre>
+    <BuyersOrderNumber>1296/0-0162438</BuyersOrderNumber>
+    <ProjectCode Preserve='true'>1296</ProjectCode>
+  </OrderReferences>
+  <HB:ProjectReferences xmlns:HB='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+    <HB:NameOfProjectOrDevelopment>The Hawthorns</HB:NameOfProjectOrDevelopment>
+  </HB:ProjectReferences>
+  <OrderDate>2001-06-06</OrderDate>
+  <Supplier>
+    <SupplierReferences>
+      <BuyersCodeForSupplier>GEO152</BuyersCodeForSupplier>
+    </SupplierReferences>
+    <Party>Moores Furniture Group</Party>
+    <Address>
+      <AddressLine>Thorp Arch Trading Estate</AddressLine>
+      <AddressLine>Wetherby</AddressLine>
+      <AddressLine>W. Yorks</AddressLine>
+      <AddressLine>LS23 7DD</AddressLine>
+    </Address>
+    <Contact>
+      <Name>Sales Dept</Name>
+      <Switchboard>01937 842394</Switchboard>
+      <Fax>01937 842394</Fax>
+      <Email>salesman@moores.co.uk</Email>
+    </Contact>
+  </Supplier>
+  <Buyer>
+    <BuyerReferences>
+      <SuppliersCodeForBuyer>RED001</SuppliersCodeForBuyer>
+    </BuyerReferences>
+    <Party>Redrow Homes (Northern) Ltd</Party>
+    <Address>
+      <AddressLine>Redrow House</AddressLine>
+      <AddressLine>Preston Brook</AddressLine>
+      <AddressLine>Cheshire</AddressLine>
+    </Address>
+    <Contact>
+      <Name>Alan Dawson</Name>
+      <Department>01244 535469</Department>
+      <Fax>01937 541584</Fax>
+      <Email>alan.dawson@bedrock.org</Email>
+    </Contact>
+  </Buyer>
+  <Delivery>
+    <DeliverTo>
+      <Party>The Hawthorns IV</Party>
+      <Address>
+        <AddressLine>St. David's Park</AddressLine>
+        <AddressLine>Ewloe</AddressLine>
+        <AddressLine>Flintshire</AddressLine>
+      </Address>
+      <Contact>
+        <Name>Alan Dawson</Name>
+        <Switchboard>01244 535469</Switchboard>
+        <Fax>01937 541584</Fax>
+        <Email>alan.dawson@redrow.co.uk</Email>
+      </Contact>
+    </DeliverTo>
+  </Delivery>
+  <InvoiceTo>
+    <Party>Redrow Homes Northern Ltd</Party>
+    <Address>
+      <AddressLine>PO Box 12345</AddressLine>
+      <AddressLine>Redrow House</AddressLine>
+      <AddressLine>St. David's Park</AddressLine>
+      <AddressLine>Flintshire</AddressLine>
+    </Address>
+    <Contact>
+      <Name>Central Payments Manager</Name>
+      <Switchboard>01244 520044</Switchboard>
+    </Contact>
+  </InvoiceTo>
+  <OrderLine>
+    <LineNumber >1</LineNumber>
+    <OrderLineReferences>
+      <ContractOrderReference>872</ContractOrderReference>
+      <BuyersOrderLineReference >129600100799</BuyersOrderLineReference>
+    </OrderLineReferences>
+    <HB:ProjectReferences xmlns:HB='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+      <HB:SiteLocation>Site Location</HB:SiteLocation>
+      <HB:BlockReference>Block ref</HB:BlockReference>
+      <HB:FloorLevel>Numeric, Ground=0</HB:FloorLevel>
+      <HB:HouseType>
+        <HB:BuyersCode Preserve='true'>F4H144.1/1G1</HB:BuyersCode>
+        <HB:Details>
+          <HB:Elevation>Tudor Render</HB:Elevation>
+          <HB:SpecificationLevel>Platinum</HB:SpecificationLevel>
+          <HB:StandardDescription>Gladstone</HB:StandardDescription>
+        </HB:Details>
+      </HB:HouseType>
+      <HB:CustomerChoice>
+        <HB:Choose>
+          <HB:ItemDescription>Range (Cat1)</HB:ItemDescription>
+          <HB:Choice>Maggiore/Quartz Fleck</HB:Choice>
+        </HB:Choose>
+      </HB:CustomerChoice>
+      <HB:ConstructionStage>8:Plaster</HB:ConstructionStage>
+      <HB:OrderSets>
+        <HB:RequiredForThisOrderOrLine>1</HB:RequiredForThisOrderOrLine>
+        <HB:BuyersNameForOrderSet>KITCHEN UNITS</HB:BuyersNameForOrderSet>
+      </HB:OrderSets>
+      <HB:PlotNumber Preserve='true'>289</HB:PlotNumber>
+      <HB:Handing>As</HB:Handing>
+      <HB:ProductGroup>KITCHN</HB:ProductGroup>
+      <HB:WorkBreakdownStructure>Work BreakDown</HB:WorkBreakdownStructure>
+    </HB:ProjectReferences>
+    <Quantity UOMCodelist='UNECE' UOMCode='PCE' UOMDescription='Piece'>
+      <Packsize>1</Packsize>
+      <Amount>1</Amount>
+    </Quantity>
+    <Price UOMCodelist='UNECE' UOMCode='PCE' UOMDescription='Piece'>
+      <UnitPrice>300.00</UnitPrice>
+    </Price>
+    <LineTotal>300.00</LineTotal>
+    <Delivery>
+      <PreferredDate>2000-05-25</PreferredDate>
+    </Delivery>
+    <OrderLineInformation>Quotation reference number</OrderLineInformation>
+    <ExtendedDescription>Additional information about what is required</ExtendedDescription>
+  </OrderLine>
+  <OrderLine>
+    <LineNumber >2</LineNumber>
+    <OrderLineReferences>
+      <ContractOrderReference>872</ContractOrderReference>
+      <BuyersOrderLineReference Preserve="true">129600100803</BuyersOrderLineReference>
+    </OrderLineReferences>
+    <HB:ProjectReferences xmlns:HB='http://www.ebuild-xml.org.uk/projectReferences-v1'>
+      <HB:HouseType>
+        <HB:BuyersCode Preserve='true'>F4H144.1/1G1</HB:BuyersCode>
+        <HB:Details>
+          <HB:Elevation>Tudor Render</HB:Elevation>
+          <HB:SpecificationLevel>Platinum</HB:SpecificationLevel>
+          <HB:StandardDescription>Gladstone</HB:StandardDescription>
+        </HB:Details>
+      </HB:HouseType>
+      <HB:ConstructionStage>9:2nd Fix</HB:ConstructionStage>
+      <HB:OrderSets>
+        <HB:RequiredForThisOrderOrLine>0</HB:RequiredForThisOrderOrLine>
+        <HB:BuyersNameForOrderSet>Ironmongery Frontdoor</HB:BuyersNameForOrderSet>
+      </HB:OrderSets>
+      <HB:PlotNumber >290</HB:PlotNumber>
+      <HB:Handing>Opp</HB:Handing>
+      <HB:ProductGroup>IRONFD</HB:ProductGroup>
+    </HB:ProjectReferences>
+    <Product>
+      <SuppliersProductCode>86RD173C</SuppliersProductCode>
+      <BuyersProductCode>4276</BuyersProductCode>
+      <Description>Hinges, 3", Brass</Description>
+      <Properties>
+        <Length>75</Length>
+        <Depth>25</Depth>
+        <Height>0</Height>
+      </Properties>
+    </Product>
+    <Quantity UOMCodelist='UNECE' UOMCode='NBR' UOMDescription='Number'>
+      <Packsize>2</Packsize>
+      <Amount>1.5</Amount>
+    </Quantity>
+    <Price UOMCodelist='UNECE' UOMCode='PCE' UOMDescription='Piece'>
+      <UnitPrice>6.00</UnitPrice>
+    </Price>
+    <LineTotal>9.00</LineTotal>
+    <Delivery>
+      <PreferredDate>2000-05-25</PreferredDate>
+    </Delivery>
+    <OrderLineInformation>Quotation reference number</OrderLineInformation>
+    <ExtendedDescription>Additional information about what is required</ExtendedDescription>
+  </OrderLine>
+  <OrderLine>
+    <LineNumber >3</LineNumber>
+    <OrderLineReferences>
+      <ContractOrderReference>879</ContractOrderReference>
+      <BuyersOrderLineReference Preserve="true">129600100876</BuyersOrderLineReference>
+    </OrderLineReferences>
+    <Product>
+      <SuppliersProductCode>Red Brough</SuppliersProductCode>
+      <BuyersProductCode>3775</BuyersProductCode>
+      <Description>Facing Brick</Description>
+    </Product>
+    <Quantity UOMCodelist='UNECE' UOMCode='MIL' UOMDescription='Thousand'>
+      <Packsize>1</Packsize>
+      <Amount>9</Amount>
+    </Quantity>
+    <Price >
+      <UnitPrice>145.00</UnitPrice>
+    </Price>
+    <LineTotal>1305.00</LineTotal>
+    <Delivery>
+      <PreferredDate>2000-05-25</PreferredDate>
+    </Delivery>
+    <OrderLineInformation>Quotation reference number</OrderLineInformation>
+    <ExtendedDescription>Additional information about what is required</ExtendedDescription>
+  </OrderLine>
+  <SpecialInstructions>No access to site before 8:00 am or after 6:00 pm.  No access to site via Ferry Lane for vehicles over 20 tonnes or 40 foot.  Driver to report to site office before unloading.</SpecialInstructions>
+  <OrderTotal>
+    <GoodsValue>1614.00</GoodsValue>
+  </OrderTotal>
+
+
+</Order>
+

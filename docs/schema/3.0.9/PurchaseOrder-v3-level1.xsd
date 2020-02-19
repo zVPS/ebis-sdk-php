@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+********************************************************************************
+                                  WARNING
+This is a development schema, which illustrates how the eBIS-XML v3 component
+library can be used to derive a functional subset from full eBIS-XML v3. While
+it is based on the order sample for certification level one, it must not be
+taken as authoritative.
+********************************************************************************
+PURPOSE OF THIS SCHEMA
+This schema defines clearly the subset of eBIS-XML used for level 1
+certification.
+HOW TO READ THIS SCHEMA
+  + First, the usual schema element appears.  
+  + We then use the XML Schema redefine element to include the library while
+  allowing component redefinition. 
+  + Within the redefine element, we change the defintions of the types
+  underlying the structures we wish to alter.
+  + Following the redefine, the schema declares one global element, "Order",
+  which uses the (altered) library types to define the allowable content of the
+  Order.
+NOTES
+  + Note in particular the targetNamespace declaration. While it is broadly
+  wrong to provide different definitions for the same element in the same
+  namespace, it is an essential consequence of BASDA's backward compatibility
+  requirements. The problem is:
+    "How does the document processor know which schema applies when the
+    namespaces are the same?"
+  + This is easily fixed in the schema - we just change the target namespace -
+  but then we have created a new message, albeit with otherwise identical
+  components. If in due course BASDA produces a version 4, it can be done in
+  this way using the same library.
+  + This is similar to xsd:include, which logically includes the content of
+  another schema document but does not allow changes.
+  + Note that XML Schema insists that these changes are strictly either
+  extensions or restrictions. One cannot arbitrarily change the definitions.
+  + The syntax of XML Schema restrictions requires the content to be written
+  out in full. Please see the literature for details.
+  -->
+<xsd:schema version='3.09' elementFormDefault='qualified' attributeFormDefault='unqualified' id='eBIS-XML_PurchaseOrder_level1' targetNamespace='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns='urn:schemas-basda-org:2000:purchaseOrder:xdr:3.01' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:doc='urn:schemas-basda-org:schema-extensions:documentation'>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <doc:Metadata>
+        <doc:Title>eBIS-XML Purchase Order (certification level 1)</doc:Title>
+        <doc:Subject>eBIS-XML example derived document definitions: certification level 1 (Order)</doc:Subject>
+        <doc:Version>
+          <doc:Number>3.09</doc:Number>
+          <doc:Status>Example schema</doc:Status>
+        </doc:Version>
+        <doc:Author>S J Baker</doc:Author>
+        <doc:ModificationDate>16 Mar 04</doc:ModificationDate>
+        <doc:Note>This schema provides the minimum allowable subset of eBIS-XML for level one certification. Other eBIS-XML data items may be used. Users in any doubt on the use of this schema should see http://basda.net or email info@basda.org.</doc:Note>
+        <doc:Note>Please see the comments in the schema file for further information on deriving subsets of eBIS-XML.</doc:Note>
+        <doc:Warning>This schema illustrates how the eBIS-XML v3 component library can be used to derive a functional subset from full eBIS-XML v3. While it is based on the order data for certification level one, it is indicative only.</doc:Warning>
+      </doc:Metadata>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:include schemaLocation='CoreTypes-v3.xsd' />
+  <xsd:redefine schemaLocation='CoreStructures-v3.xsd'>
+<!-- 
+  Eliminates Function from OrderHead
+  -->
+    <xsd:complexType name='OrderHeadStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='OrderHeadStructure'>
+          <xsd:sequence>
+            <xsd:element ref='Schema' />
+            <xsd:element ref='Stylesheet' minOccurs='0' />
+            <xsd:element ref='Parameters' />
+            <xsd:element ref='OriginatingSoftware' minOccurs='0' />
+            <xsd:element ref='TestFlag' minOccurs='0' />
+            <xsd:element ref='OrderType' />
+            <xsd:element ref='OrderCurrency' />
+            <xsd:element ref='Checksum' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!-- 
+  OrderReferences is restricted to exactly one BuyersOrderNumber, itself
+  from the library.
+  -->
+    <xsd:complexType name='OrderReferencesStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='OrderReferencesStructure'>
+          <xsd:sequence>
+            <xsd:element ref='BuyersOrderNumber' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!--
+  Restricted to exactly one each of Party and Address, themselves
+  from the library.
+  -->
+    <xsd:complexType name='SupplierStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='SupplierStructure'>
+          <xsd:sequence>
+            <xsd:element ref='Party' />
+            <xsd:element ref='Address' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!--
+  Restricted to exactly one each of Party and Address, themselves
+  from the library.
+  -->
+    <xsd:complexType name='BuyerStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='BuyerStructure'>
+          <xsd:sequence>
+            <xsd:element ref='Party' />
+            <xsd:element ref='Address' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!--
+  Restricted to exactly LineNumber, Product and Quantity
+  -->
+    <xsd:complexType name='OrderLineStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='OrderLineStructure'>
+          <xsd:sequence>
+            <xsd:element ref='LineNumber' />
+            <xsd:element ref='Product' />
+            <xsd:element ref='Quantity' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!--
+  BuyersProductCode and Description only
+  -->
+    <xsd:complexType name='ProductStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='ProductStructure'>
+          <xsd:sequence>
+            <xsd:element ref='BuyersProductCode' minOccurs='0' />
+            <xsd:element ref='Description' />
+          </xsd:sequence>
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+<!--
+  We disallow packsize
+  -->
+    <xsd:complexType name='QuantityStructure'>
+      <xsd:complexContent>
+        <xsd:restriction base='QuantityStructure'>
+          <xsd:sequence>
+            <xsd:element ref='Amount' />
+          </xsd:sequence>
+          <xsd:attributeGroup ref='UOMattrGroup' />
+        </xsd:restriction>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:redefine>
+  <xsd:element name='Order'>
+<!--
+  Compared to core order, deleted:
+    - extensions (xsd:any)
+    - Originator
+    - Delivery
+    - InvoiceTo
+    - PercentDiscount
+    - AmountDiscount
+    - SpecialInstructions
+    - Narrative
+    - Settlement
+    - TaxSubTotal
+    - OrderTotal
+  -->
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref='OrderHead' />
+        <xsd:element ref='OrderReferences' minOccurs='0' />
+        <xsd:element ref='OrderDate' />
+        <xsd:element ref='Supplier' />
+        <xsd:element ref='Buyer' minOccurs='0' />
+        <xsd:element ref='OrderLine' maxOccurs='unbounded' />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

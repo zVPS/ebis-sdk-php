@@ -1,0 +1,9 @@
+<OrderResponse xsi:schemaLocation='orderResponse-v0.1.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://www.ebis-xml.net/orderResponse-v0.1'>
+  <OrderReferences>
+    <CostCentre>02</CostCentre>
+    <BuyersOrderNumber>1296/0-0162438</BuyersOrderNumber>
+    <ProjectCode>1296</ProjectCode>
+  </OrderReferences>
+  <DateReceived>2001-10-11</DateReceived>
+</OrderResponse>
+

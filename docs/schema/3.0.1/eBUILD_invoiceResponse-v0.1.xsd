@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns='http://www.ebis-xml.net/invoiceResponse-v0.1' elementFormDefault='qualified' xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='http://www.ebis-xml.net/invoiceResponse-v0.1' attributeFormDefault='unqualified' id='eBIS-XMLInvoiceResponse'>
+  <xsd:element name='InvoiceResponse'>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name='InvoiceReferences' type='InvoiceReferencesType'>
+          <xsd:annotation>
+            <xsd:documentation>This should contain the InvoiceReferences section from the incoming invoice.  The only mandatory element is SuppliersInvoiceNumber.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name='DateReceived' type='xsd:date'>
+          <xsd:annotation>
+            <xsd:documentation>The date the invoice was received on.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name='InvoiceReferencesType'>
+    <xsd:sequence>
+      <xsd:element name='ContractOrderReference' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='CostCentre' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='BuyersOrderNumber' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='Department' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='GeneralLedgerCode' type='xsd:string' minOccurs='0' maxOccurs='1' />
+      <xsd:element name='ProjectCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='ProjectAnalysisCode' minOccurs='0' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name='SuppliersInvoiceNumber' minOccurs='1' maxOccurs='1'>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base='xsd:string'>
+              <xsd:attribute name='Preserve' use='optional'>
+                <xsd:simpleType>
+                  <xsd:restriction base='xsd:string'>
+                    <xsd:enumeration value='true' />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<!--
+  XDR compatibility schema.  
+  This schema emulates certain XDR data types in XML Schema
+  -->
+<xsd:schema xmlns:xdr='http://www.decisionsoft.com/XDR-compat-v1' elementFormDefault='qualified' xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='http://www.decisionsoft.com/XDR-compat-v1' attributeFormDefault='unqualified'>
+  <xsd:simpleType name='emptyString'>
+    <xsd:restriction base='xsd:string'>
+      <xsd:maxLength value='0' />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name='dateTime'>
+    <xsd:union memberTypes='xsd:date xsd:dateTime xdr:emptyString' />
+  </xsd:simpleType>
+  <xsd:simpleType name='int'>
+    <xsd:union memberTypes='xsd:integer xdr:emptyString' />
+  </xsd:simpleType>
+  <xsd:simpleType name='float'>
+    <xsd:union memberTypes='xsd:float xdr:emptyString' />
+  </xsd:simpleType>
+</xsd:schema>
+
